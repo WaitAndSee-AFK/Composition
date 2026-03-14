@@ -1,6 +1,10 @@
 plugins {
+    alias(libs.plugins.kapt)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
+    alias(libs.plugins.navigation.safeargs)
+    id("kotlin-kapt")
 }
 
 android {
@@ -33,12 +37,19 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+//    dataBinding {
+//        enable = true
+//    }
     buildFeatures {
+        dataBinding = true
         viewBinding = true
     }
 }
 
 dependencies {
+    implementation("androidx.databinding:databinding-runtime:8.7.3")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
